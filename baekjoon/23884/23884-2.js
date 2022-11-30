@@ -10,23 +10,36 @@ const input = fs.readFileSync('./input.txt').toString().split('\n');
 const K = Number(input[0].split(' ')[1]);
 const arr = input[1].split(' ').map(el => Number(el));
 
+const map = new Map();
+
+for (let i = 0; i < arr.length; i++) {
+    map.set(i, arr[i]);
+}
+
+const sorted = [...arr].sort((a, b) => a - b);
+
+console.log(map, sorted);
+
 function selection_sort(arr, K) {
     let counter = 0;
+    
     for(let i = arr.length - 1; i > 0; i--) {
-        let max = i;
+        if(arr[i] !== sorted[i]) { 
+            const temp = arr[i];    
+            const temp2 = map.get(sorted[i] - 1); 
+            console.log(temp2);
 
-        for(let j = i - 1; j >= 0; j--) {
-            if(arr[max] < arr[j]) max = j;
-        }
+            [arr[i], arr[temp2]] = [arr[temp2], arr[i]];
 
-        if(max !== i) {
-            [arr[i], arr[max]] = [arr[max], arr[i]];
-            counter++;
-            if(counter === K) return `${[...arr]}`.replaceAll(',', ' ');
+            // counter++;
+            // if(counter === K) return arr;
+
+            map[arr[i]] = i;
+            map[temp] = temp2;
         }
     }
 
-    return -1;
+    return arr;
 }
 
-console.log(selection_sort(arr, K));
+console.log(`${selection_sort(arr, K)}`.replaceAll(',', ' '));

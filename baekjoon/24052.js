@@ -2,6 +2,8 @@
 // // N개의 서로 다른 양의 정수가 저장된 배열 A가 있다. 삽입 정렬로 배열 A를 오름차순 정렬할 경우 배열 A의 원소가 K 번 변경된 직후의 배열 A를 출력해 보자.
 // // 크기가 N인 배열에 대한 삽입 정렬 의사 코드는 다음과 같다.
 
+//input (/dev/stdin)
+
 const fs = require('fs');
 const input = fs.readFileSync('./input.txt').toString().split('\n');
 
